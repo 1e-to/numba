@@ -338,6 +338,7 @@ class CompilerBase(object):
         self.state.pipeline = self
 
         # parfor diagnostics info, add to metadata
+        print("ИНИТ КОМПАЙЛЕР БЕЙС")
         self.state.parfor_diagnostics = ParforDiagnostics()
         self.state.metadata['parfor_diagnostics'] = \
             self.state.parfor_diagnostics
