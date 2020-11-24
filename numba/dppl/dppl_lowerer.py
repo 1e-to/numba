@@ -1168,8 +1168,12 @@ class DPPLLower(Lower):
         try:
             lowering.lower_extensions[parfor.Parfor].append(lower_parfor_rollback)
             self.gpu_lower.lower()
+            # if lower dont crash, and parfor_diagnostics is empthy then it is kernel
+            # add condition if parfor_diagnostics None
+            self.gpu_lower.metadata['parfor_diagnostics'].extra_info["kernel"] = str(dpctl.get_current_queue().get_sycl_device().get_device_name())
             self.base_lower = self.gpu_lower
             lowering.lower_extensions[parfor.Parfor].pop()
+            
         except Exception as e:
             if numba.dppl.compiler.DEBUG:
                 print("Failed to lower parfor on DPPL-device. Due to:\n", e)

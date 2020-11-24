@@ -943,7 +943,7 @@ class ParforDiagnostics(object):
             lines = inspect.getsource(func_name).splitlines()
         except OSError: # generated function
             lines = None
-        if lines:
+        if lines and parfors_simple:
             src_width = max([len(x) for x in lines])
             map_line_to_pf = defaultdict(list) # parfors can alias lines
             for k, v in parfors_simple.items():
@@ -1367,7 +1367,10 @@ class ExtendedParforDiagnostics(ParforDiagnostics):
 
     def dump(self, level=1):
         ParforDiagnostics.dump(self, level=1)
-
+        ##wip
+        print("!!!ExtendedParforDiagnostics!!!")
+        print(self.extra_info)
+        ##
         if self.extra_info:
             parfors_simple = self.get_parfors_simple(False)
             all_lines = self.get_all_lines(parfors_simple)
