@@ -1169,7 +1169,7 @@ class DPPLLower(Lower):
             lowering.lower_extensions[parfor.Parfor].append(lower_parfor_rollback)
             self.gpu_lower.lower()
             # if lower dont crash, and parfor_diagnostics is empthy then it is kernel
-            # add condition if parfor_diagnostics None
+            # if not self.gpu_lower.metadata['parfor_diagnostics']: 
             self.gpu_lower.metadata['parfor_diagnostics'].extra_info["kernel"] = str(dpctl.get_current_queue().get_sycl_device().get_device_name())
             self.base_lower = self.gpu_lower
             lowering.lower_extensions[parfor.Parfor].pop()

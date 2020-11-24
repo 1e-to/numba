@@ -327,12 +327,12 @@ class DumpParforDiagnostics(AnalysisPass):
         AnalysisPass.__init__(self)
 
     def run_pass(self, state):
-        # if state.flags.auto_parallel.enabled: //add in condition flag for kernels
-        if config.PARALLEL_DIAGNOSTICS:
-            if state.parfor_diagnostics is not None:
-                state.parfor_diagnostics.dump(config.PARALLEL_DIAGNOSTICS)
-            else:
-                raise RuntimeError("Diagnostics failed.")
+        if state.flags.auto_parallel.enabled:
+            if config.PARALLEL_DIAGNOSTICS:
+                if state.parfor_diagnostics is not None:
+                    state.parfor_diagnostics.dump(config.PARALLEL_DIAGNOSTICS)
+                else:
+                    raise RuntimeError("Diagnostics failed.")
         return True
 
 
