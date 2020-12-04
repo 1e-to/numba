@@ -96,7 +96,6 @@ class _ResolutionFailures(object):
         argstr = argsnkwargs_to_str(self._args, self._kwargs)
         ncandidates = sum([len(x) for x in self._failures.values()])
 
-
         # sort out a display name for the function
         tykey = self._function_type.typing_key
         # most things have __name__
@@ -458,6 +457,20 @@ class MakeFunctionLiteral(Literal, Opaque):
     pass
 
 
+class _PickleableWeakRef(weakref.ref):
+    """
+    Allow a weakref to be pickled.
+
+    Note that if the object referred to is not kept alive elsewhere in the
+    pickle, the weakref will immediately expire after being constructed.
+    """
+    def __getnewargs__(self):
+        obj = self()
+        if obj is None:
+            raise ReferenceError("underlying object has vanished")
+        return (obj,)
+
+
 class WeakType(Type):
     """
     Base class for types parametered by a mortal object, to which only
@@ -465,7 +478,7 @@ class WeakType(Type):
     """
 
     def _store_object(self, obj):
-        self._wr = weakref.ref(obj)
+        self._wr = _PickleableWeakRef(obj)
 
     def _get_object(self):
         obj = self._wr()

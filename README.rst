@@ -25,18 +25,29 @@ driver API.
 Note. To use the GPU users should be added to "video" user group on Linux systems.
 
 
-The following requisites will need to be present in the system. Refer to next section for more details.
-*******************************************************************************************************
+For more information about Numba, see the Numba homepage:
+https://numba.pydata.org
 
-- NUMBA v0.51          : The DPPL backend has only been tested for NUMBA v0.51.
-                         The included install script downloads and applies
-                         the DPPy patch to the correct NUMBA version.
+Supported Platforms
+===================
+
+* Operating systems and CPU:
+
+  - Linux: x86 (32-bit), x86_64, ppc64le (POWER8 and 9), ARMv7 (32-bit),
+    ARMv8 (64-bit)
+  - Windows: x86, x86_64
+  - macOS: x86_64
+  - \*BSD: (unofficial support only)
+
+* (Optional) Accelerators and GPUs:
 
 - LLVM-SPIRV translator: Used for SPIRV generation from LLVM IR.
 
 - LLVMDEV              : To support LLVM IR generation.
 
-- Others               : All existing dependecies for NUMBA, such as llvmlite, also apply to DPPL.
+* Python versions: 3.6-3.8
+* llvmlite 0.35.*
+* NumPy >=1.15 (can build with 1.11 for ABI compatibility)
 
 ==================
 3. How to install?
@@ -71,11 +82,11 @@ to get a local installation of NUMBA-PyDPPL.
 To make sure the installation was successful, try running the examples and the
 test suite:
 
-    $PATH_TO_NUMBA-PyDPPL/numba/dppl/examples/
+For more options, see the Installation Guide: https://numba.readthedocs.io/en/stable/user/installing.html
 
 To run the test suite execute the following:
 
-.. code-block:: bash
+https://numba.readthedocs.io/en/stable/index.html
 
     python -m numba.runtests numba.dppl.tests
 

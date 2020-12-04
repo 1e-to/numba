@@ -13,6 +13,7 @@ Our supported platforms are:
 * Linux ppcle64 (POWER8)
 * Windows 7 and later (32-bit and 64-bit)
 * OS X 10.9 and later (64-bit)
+* \*BSD (unofficial support only)
 * NVIDIA GPUs of compute capability 2.0 and later
 * AMD ROC dGPUs (linux only and not for AMD Carrizo or Kaveri APU)
 * ARMv7 (32-bit little-endian, such as Raspberry Pi 2 and 3)
@@ -265,6 +266,8 @@ vary with target operating system and hardware. The following lists them all
   * ``graphviz`` - for some CFG inspection functionality.
   * ``pickle5`` - provides Python 3.8 pickling features for faster pickling in
     Python 3.6 and 3.7.
+  * ``typeguard`` - used by ``runtests.py`` for
+    :ref:`runtime type-checking <type_anno_check>`.
 
 * To build the documentation:
 

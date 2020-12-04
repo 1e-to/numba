@@ -101,10 +101,8 @@ Dispatching
 - :ghfile:`numba/core/dispatcher.py` - Dispatcher objects are compiled functions
   produced by ``@jit``.  A dispatcher has different implementations
   for different type signatures.
-- :ghfile:`numba/_dispatcher.{h,c}` - C interface to C++ dispatcher
-  implementation
-- :ghfile:`numba/_dispatcherimpl.cpp` - C++ dispatcher implementation (for
-  speed on common data types)
+- :ghfile:`numba/_dispatcher.cpp` - C++ dispatcher implementation (for speed on
+  common data types)
 
 
 Compiler Pipeline
@@ -133,8 +131,6 @@ Compiler Pipeline
   print nodes in the IR
 - :ghfile:`numba/core/rewrites/static_raise.py` - Converts exceptions with
   static arguments into a special form that can be lowered
-- :ghfile:`numba/core/rewrites/macros.py` - Generic support for macro expansion
-  in the Numba IR
 - :ghfile:`numba/core/rewrites/static_getitem.py` - Rewrites getitem and setitem
   with constant arguments to allow type inference
 - :ghfile:`numba/core/rewrites/static_binop.py` - Rewrites binary operations
@@ -360,6 +356,8 @@ that must be matched during type inference.
 - :ghfile:`numba/core/typing/cffi_utils.py` - Typing of CFFI objects
 - :ghfile:`numba/core/typing/typeof.py` - Implementation of typeof operations
   (maps Python object to Numba type)
+- :ghfile:`numba/core/typing/asnumbatype.py` - Implementation of
+  ``as_numba_type`` operations (maps Python types to Numba type)
 - :ghfile:`numba/core/typing/npdatetime.py` - Datetime dtype support for NumPy
   arrays
 

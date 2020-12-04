@@ -352,17 +352,12 @@ class BaseContext(object):
         try:
             return typeof(val, Purpose.argument)
         except ValueError:
-            from numba.dppl_config import dppl_present, DeviceArray
-            if dppl_present:
-                if(type(val) == DeviceArray):
-                    return typeof(val._ndarray, Purpose.argument)
-                # DRD : Hmmm... is the assumption that this error is encountered
-                # when someone is using cuda, and already has done an import
-                # cuda?
-                #elif numba.cuda.is_cuda_array(val):
-                #    return typeof(numba.cuda.as_cuda_array(val), Purpose.argument)
-                else:
-                    raise
+            if numba.cuda.is_cuda_array(val):
+                # There's no need to synchronize on a stream when we're only
+                # determining typing - synchronization happens at launch time,
+                # so eliding sync here is safe.
+                return typeof(numba.cuda.as_cuda_array(val, sync=False),
+                              Purpose.argument)
             else:
                 raise
 
